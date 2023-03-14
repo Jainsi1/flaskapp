@@ -1,5 +1,7 @@
 FROM python:3.8
-WORKDIR index.py
+WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
-ENV PORT=4000
+ENTRYPOINT [ "python" ]
+
+CMD ["index.py" ]

@@ -1,9 +1,5 @@
 on:
   workflow_dispatch:
-   inputs:
-      file:
-        description: 'path of file'
-        required: true
 
 jobs:
   test:

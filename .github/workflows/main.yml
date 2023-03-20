@@ -20,13 +20,29 @@ jobs:
       uses: virtuecloud/Composite-actions/Build/Python@test
       
     - name: Configure AWS credentials
-      uses: peterkimzz/aws-ssm-send-command@1.0.1
+      uses: aws-actions/configure-aws-credentials@v1
       with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          instance-ids: i-0161cb4d1ea84157e
-          comment: Deploy the master branch
-          working-directory: /home/ubuntu
-          command: /bin/sh ./a.sh
-       
+          
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync ./python/ s3://flask-buckett.com --delete 
+  deploy:
+   runs-on: ubuntu-latest
+   name: to deploy python
+   steps:
+      
+    - name: checkout
+      uses: actions/checkout@v2
+
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
+    - name: Deploy to ec2
+      run: aws ssm send-command --document-name “AWS-RunRemoteScript” --targets “Key=InstanceIds,Values=[i-0161cb4d1ea84157e]” --parameters ‘{“sourceType”:["S3"],“sourceInfo”:[“{\“path\“:\“https://flask-buckett.s3.us-east-1.amazonaws.com/python\“}”],“commandLine”:[“bash a.sh”]}’

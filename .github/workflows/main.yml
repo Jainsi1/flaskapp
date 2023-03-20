@@ -20,12 +20,13 @@ jobs:
       uses: virtuecloud/Composite-actions/Build/Python@test
       
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+			uses: peterkimzz/aws-ssm-send-command@1.0.1
       with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-
-    - name: AWS SSM Send-Command
-      run: aws ssm send-command --document-name "AWS-RunRemoteScript" --instance-ids "i-0161cb4d1ea84157e" --parameters '{"sourceType":["GitHub"],"sourceInfo":["{\"owner\":\"Jainsi1\", \"repository\":\"flaskapp\", \"path\":\"python\"}"],"commandLine":["python index.py"]}'
-      shell: bash        
+          instance-ids: i-0161cb4d1ea84157e
+			    comment: Deploy the master branch
+			    working-directory: /home/ubuntu
+			    command: /bin/sh ./a.sh
+       

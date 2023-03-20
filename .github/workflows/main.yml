@@ -28,9 +28,12 @@ jobs:
           
     - name: Deploy static site to S3 bucket
       run: aws s3 sync ./python/ s3://flask-buckett.com --delete 
+      
   deploy:
    runs-on: ubuntu-latest
    name: to deploy python
+   needs: test
+   
    steps:
       
     - name: checkout

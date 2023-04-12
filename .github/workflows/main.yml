@@ -5,7 +5,7 @@ on:
         description: name of bucket
         required: true
       bucketregion:
-        description: name of bucket
+        description: region of bucket
         required: true
       path:
         description: path of folder/file to be uploaded

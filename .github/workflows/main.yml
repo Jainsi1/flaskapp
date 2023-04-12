@@ -36,7 +36,7 @@ jobs:
           aws-region: us-east-1
           
     - name: Deploy static site to S3 bucket
-      uses: virtuecloud/Compostite-actions/Deploy/s3_sync@main
+      uses: virtuecloud/Composite-actions/Deploy/s3_sync@main
       with:
           BUCKET_NAME: ${{ github.event.inputs.bucketname }}     
           PATH: ${{ github.event.inputs.path }}        
@@ -60,7 +60,7 @@ jobs:
           aws-region: us-east-1
           
     - name: Deploy to ec2
-      uses: virtuecloud/Compostite-actions/Deploy/EC2_Deploy@main
+      uses: virtuecloud/Composite-actions/Deploy/EC2_Deploy@main
       with:
           INSTANCE_ID: ${{ github.event.inputs.instanceid }}
           BUCKET_NAME: ${{ github.event.inputs.bucketname }}

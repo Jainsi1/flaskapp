@@ -36,7 +36,7 @@ jobs:
           aws-region: us-east-1
           
     - name: Deploy static site to S3 bucket
-      uses: virtuecloud/Composite-actions/Deploy/s3_sync@main
+      uses: virtuecloud/Composite-actions/Deploy/S3_sync@main
       with:
           BUCKET_NAME: ${{ github.event.inputs.bucketname }}     
           PATH: ${{ github.event.inputs.path }}        

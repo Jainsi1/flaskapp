@@ -49,4 +49,4 @@ jobs:
           aws-region: us-east-1
           
     - name: Deploy to ec2
-      run: aws ssm send-command --document-name "AWS-RunRemoteScript" --instance-ids "i-0bc9ff54f414b5e1c" --parameters '{"sourceType":["S3"],"sourceInfo":["{\"path\":\"https://flask-buckett.s3.us-east-1.amazonaws.com\"}"],"commandLine":["sudo bash a.sh"],"workingDirectory":["/home/ubuntu"]}'
+      run: aws ssm send-command --document-name "AWS-RunRemoteScript" --instance-ids "i-0bc9ff54f414b5e1c" --parameters '{"sourceType":["S3"],"sourceInfo":["{\"path\":\"https://rennn.s3.us-east-1.amazonaws.com\"}"],"commandLine":["sudo bash a.sh"],"workingDirectory":["/home/ubuntu"]}'
